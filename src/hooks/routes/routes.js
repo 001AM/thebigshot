@@ -7,6 +7,7 @@ import Login from '../../pages/login/login';
 // import Chat from '../../pages/messages/chat';
 import Profile from '../../pages/profiles/profile';
 import Dashboard from '../../pages/Dashboard/dashboard';
+import JobExpand from '../../pages/Jobs/jobexpand';
 
 const routesConfig = [
   {
@@ -26,11 +27,11 @@ const routesConfig = [
         index: true,
         element: <Home />,
       },
-      // {
-      //   path:'/chat',
-      //   index: true,
-      //   // element: <Chat />,
-      // },
+      {
+        path:'/jobs',
+        index: true,
+        element: <JobExpand />,
+      },
       {
         path:'/dashboard',
         index: true,
