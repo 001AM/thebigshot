@@ -23,19 +23,24 @@ function JobExpand() {
         {/* Display job information */}
         <Titleboard jobInfo={jobInfo}/>
       </div>
-      <div className="col-span-1 sm:col-span-6 md:col-span-7">
-        {/* Display job information */}
-        <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
-          <div className="text-3xl font-bold">Job Description</div>
-          sohamamsm
+      <div className="flex flex-col flex-1 col-span-1 gap-2 sm:col-span-9">
+        <div className="">
+          {/* Display job information */}
+          <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
+            <div className="text-3xl font-bold">Job Description</div>
+            sohamamsm
+          </div>
+        </div>
+        <div className="">
+          {/* Display job information */}
+          <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
+            <div className="text-3xl font-bold">About Company</div>
+            sohamamsm
+          </div>
         </div>
       </div>
-      <div className="col-span-1 sm:col-span-6 md:col-span-7">
-        {/* Display job information */}
-        <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
-          <div className="text-3xl font-bold">About Company</div>
-          sohamamsm
-        </div>
+      <div className="hidden col-span-3 border-2 rounded-md sm:block sm:p-4 border-blue-primary">
+        Connection 
       </div>
     </div>
   );
