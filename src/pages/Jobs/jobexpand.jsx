@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Titleboard from "./Components/titleboard";
+import ProfileAvatar from "./Components/recommdation";
 
 function JobExpand() {
   // Initial state for job information
@@ -15,15 +16,19 @@ function JobExpand() {
     aboutCompany: "", // Add a placeholder for about the company
     address: "", // Add a placeholder for the address
   });
-
+  const [avatarInfo, setAvatarInfo] = useState({
+    name:'Soham',
+    specailization:'Ceo of Interv',
+    email:'sohampanchal1469@gmail.com'
+  })
   return (
     <div className="grid grid-cols-1 gap-6 px-2 sm:grid-cols-6 md:grid-cols-12">
       {/* Your JSX content goes here */}
       <div className="col-span-1 sm:col-span-6 md:col-span-12">
         {/* Display job information */}
-        <Titleboard jobInfo={jobInfo}/>
+        <Titleboard jobInfo={jobInfo} />
       </div>
-      <div className="flex flex-col flex-1 col-span-1 gap-2 sm:col-span-6 md:col-span-9">
+      <div className="flex flex-col flex-1 col-span-1 gap-2 sm:col-span-6 md:col-span-8 lg:col-span-9">
         <div className="">
           {/* Display job information */}
           <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
@@ -39,9 +44,21 @@ function JobExpand() {
           </div>
         </div>
       </div>
-      <div className="hidden col-span-3 border-2 rounded-md md:block sm:p-4 border-blue-primary">
-        Connection 
+      <div className="hidden col-span-4 border-2 rounded-md lg:col-span-3 md:block sm:p-4 border-blue-primary">
+        <span className="w-full p-1 text-xl font-bold border-b-2 border-blue-primary">Connection Recommendation</span>
+        <div className="">
+          <ProfileAvatar AvatarInfo={avatarInfo}/>
+          <ProfileAvatar AvatarInfo={avatarInfo}/>
+          <ProfileAvatar AvatarInfo={avatarInfo}/>
+          <ProfileAvatar AvatarInfo={avatarInfo}/>
+          <div class="pt-3 pb-0 sm:pt-4">
+            <div className="flex justify-center mt-2 text-blue-500 cursor-pointer">
+              Show All
+            </div>
+          </div>
+        </div>
       </div>
+      
     </div>
   );
 }
