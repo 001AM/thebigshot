@@ -49,6 +49,7 @@ function Titleboard({ jobInfo }) {
           </button>
         </div>
       </div>
+      
     </div>
   )
 }

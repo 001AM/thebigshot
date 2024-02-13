@@ -6,10 +6,10 @@ function BaseLayout() {
   return (
     <>
       <div className="flex flex-col h-screen">
-        <nav className="text-white">
+        <nav className="top-0 w-full text-white absoulte">
           <Navbar />
         </nav>
-        <div className="px-2">
+        <div className="px-2 mt-4 overflow-y-auto">
           <Outlet />
         </div>
       </div>

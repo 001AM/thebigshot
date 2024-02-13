@@ -31,22 +31,21 @@ function JobExpand() {
       <div className="flex flex-col flex-1 col-span-1 gap-2 sm:col-span-6 md:col-span-8 lg:col-span-9">
         <div className="">
           {/* Display job information */}
-          <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
+          <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-96 max-h-max">
             <div className="text-3xl font-bold">Job Description</div>
             sohamamsm
           </div>
         </div>
-        <div className="">
-          {/* Display job information */}
+        {/* <div className="">
           <div className="p-2 border-2 rounded-md sm:p-4 border-blue-primary min-h-52 max-h-max">
             <div className="text-3xl font-bold">About Company</div>
             sohamamsm
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="hidden col-span-4 border-2 rounded-md lg:col-span-3 md:block sm:p-4 border-blue-primary">
-        <span className="w-full p-1 text-xl font-bold border-b-2 border-blue-primary">Connection Recommendation</span>
-        <div className="">
+      <div className="col-span-1 p-2 border-2 rounded-md min-h-96 sm:col-span-6 md:col-span-4 lg:col-span-3 sm:p-4 border-blue-primary">
+        <span className="w-full p-1 text-xl font-bold border-b-2 border-blue-primary">About Company</span>
+        {/* <div className="">
           <ProfileAvatar AvatarInfo={avatarInfo}/>
           <ProfileAvatar AvatarInfo={avatarInfo}/>
           <ProfileAvatar AvatarInfo={avatarInfo}/>
@@ -56,9 +55,11 @@ function JobExpand() {
               Show All
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      
+      <div className="col-span-1 border-2 rounded-md sm:col-span-6 md:col-span-12 h-52 border-blue-primary">
+        asdasd
+      </div>
     </div>
   );
 }
