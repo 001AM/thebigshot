@@ -60,6 +60,9 @@ function JobExpand() {
       <div className="col-span-1 border-2 rounded-md sm:col-span-6 md:col-span-12 h-52 border-blue-primary">
         asdasd
       </div>
+      <div className="">
+        
+      </div>
     </div>
   );
 }

@@ -1,21 +1,23 @@
 // src/Login.js
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Change to useNavigate
+import { useNavigate } from 'react-router-dom';
 import ExampleContext from '../../context/Context';
 import axiosInstance from '../../axios';
 import { ToastContainer, toast } from 'react-toastify';
 import './login.css'; // Reuse the styling file
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub, FaFacebook } from "react-icons/fa6";
 
 const Login = () => {
-    const navigate = useNavigate(); // Use useNavigate instead of Navigate
-    const { userid, setUserid, isLogin, setLogin, setUsername } = useContext(ExampleContext);
+    const navigate = useNavigate();
+    const { isLogin, setLogin } = useContext(ExampleContext);
 
     useEffect(() => {
-        console.log('...', isLogin)
         if (isLogin) {
             navigate('/home');
         }
-    }, [isLogin, navigate]); // Include navigate in the dependency array
+    }, [isLogin, navigate]);
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -29,66 +31,89 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(formData)
-            axiosInstance
-			.post(`authentication/login/`, {
-                username : formData.username,
-                password : formData.password
-            })
-			.then((res) => {
-				localStorage.setItem('access_token', res.data.access);
-				localStorage.setItem('refresh_token', res.data.refresh);
-				axiosInstance.defaults.headers['Authorization'] =
-					'JWT ' + localStorage.getItem('access_token');
-				toast.success('success')
-                setLogin(true)
-                navigate('/home')
-				//console.log(res);
-				//console.log(res.data);
-			})
-            .catch((error) => {
-                console.error('Error:', error);
-                toast.error("Registration failed");
-            })
+            console.log(formData);
+            toast.success('Login successful');
+            setLogin(true);
+            navigate('/home');
         } catch (error) {
-            // Handle the error, e.g., show an error message to the user
-            console.error('Registration failed:', error);
+            console.error('Login failed:', error);
+            toast.error('Login failed. Please try again.');
         }
     };
 
-    return (
-        <div className='flex items-center justify-center h-screen'>
-            <div className="p-8 bg-white rounded shadow-md auth-container w-96">
-                <h1 className="mb-4 text-2xl font-bold">Login</h1>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <label className="block">
-                        <span className="text-gray-700">Email:</span>
-                        <input
-                            type="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            className="block w-full mt-1 form-input"
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="text-gray-700">Password:</span>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="block w-full mt-1 form-input"
-                        />
-                    </label>
-                    <button type="submit" className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
-                        Login
-                    </button>
-                </form>
-            </div>
-            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-        </div>
+    const handleSignInWithGoogle = () => {
+        toast.success('Sign in with Google');
+    };
 
+    const handleSignInWithGitHub = () => {
+        toast.success('Sign in with GitHub');
+    };
+
+    const handleSignInWithFacebook = () => {
+        toast.success('Sign in with Facebook');
+    };
+
+    return (
+        <div className='flex items-center justify-center min-h-screen bg-black'>
+            <div className="p-8 bg-white rounded shadow-md auth-container md:w-1/2 flex flex-col items-center">
+                <div className="logo-title text-center text-4xl font-bold mb-8" style={{ color: 'black' }}>
+                    Logo
+                </div>
+                <hr className="mx-auto w-1/2 border-t border-black mb-8" />
+                
+                <h1 className="text-3xl font-bold mb-8 text-center md:text-left" style={{ color: 'black' }}>Login</h1>
+                
+                <form onSubmit={handleSubmit} className="w-full">
+                    <div class="mb-4">
+                        <label class="block font-semibold text-gray-700 mb-2" for="email">
+                            Email Address
+                        </label>
+                        <input
+                            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email" type="email" placeholder="Enter your email address" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block font-semibold text-gray-700 mb-2" for="password">
+                            Password
+                        </label>
+                        <input
+                            class="border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            id="password" type="password" placeholder="Enter your password" />
+                        <a class="text-gray-600 hover:text-gray-800" href="#">Forgot your password?</a>
+                    </div>
+                    <div class="mb-6">
+                        <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                            type="button">
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <div className="flex flex-col space-y-2 md:space-y-4 items-center">
+                    <button
+                        className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-4 py-2 text-sm md:text-base font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full"
+                        onClick={handleSignInWithGoogle}>
+                        <FcGoogle />
+                        <span className="ml-2">Sign in with Google</span>
+                    </button>
+                    <button
+                        className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-4 py-2 text-sm md:text-base font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full"
+                        onClick={handleSignInWithGitHub}>
+                        <FaGithub />
+                        <span className="ml-2">Sign in with GitHub</span>
+                    </button>
+                    <button
+                        className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-4 py-2 text-sm md:text-base font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full"
+                        onClick={handleSignInWithFacebook}>
+                        <FaFacebook />
+                        <span className="ml-2">Sign in with Facebook</span>
+                    </button>
+                </div>
+                
+            </div>
+            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        </div>
     );
 };
 

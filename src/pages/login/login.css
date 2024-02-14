@@ -1,11 +1,11 @@
 /* src/AuthForm.css */
 .auth-container {
-    max-width: 400px;
+    max-width: 100%;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background: linear-gradient(135deg, #8a2be2, #4169e1, #ffa500);
+    background: #f9f9f9;
     color: white;
   }
   
