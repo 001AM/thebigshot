@@ -132,9 +132,9 @@ function Profile() {
       <div className="col-span-1 sm:col-span-6 md:col-span-12 ">
         <div className="static col-span-1 rounded-md h-52 sm:col-span-6 md:col-span-12 bg-blue-primary"></div>
         <div className="grid grid-cols-1 gap-2 px-2 sm:grid-cols-6 md:grid-cols-12">
-          <div className="col-span-1 sm:col-span-6 md:col-span-8 relative">
-            <img src={pict} alt="picture" className="absolute w-32 h-32 col-span-1 overflow-hidden bg-white border-4 border-white rounded-full lg:col-span-12 sm:col-span-6 sm:w-36 sm:h-36 top-0 left-5 transform translate-x-1 -translate-y-1/2" />
-            <div className="p-2 mt-4 z-10 pl-5 mb-2 border-2 rounded-md sm:pl-8 h-52 sm:col-span-6 md:col-span-8 border-blue-primary">
+          <div className="relative col-span-1 sm:col-span-6 md:col-span-8">
+            <img src={pict} alt="picture" className="absolute top-0 w-32 h-32 col-span-1 overflow-hidden transform translate-x-1 -translate-y-1/2 bg-white border-4 border-white rounded-full lg:col-span-12 sm:col-span-6 sm:w-36 sm:h-36 left-5" />
+            <div className="z-10 p-2 pl-5 mt-4 mb-2 border-2 rounded-md sm:pl-8 h-52 sm:col-span-6 md:col-span-8 border-blue-primary">
               <div>
                 <div
                   className="flex flex-row hover:cursor-pointer"
@@ -213,7 +213,7 @@ function Profile() {
               <div className="w-full h-full"></div>
             </div>
           </div>
-          <div className=" mt-4 hidden col-span-4 gap-2 md:block">
+          <div className="hidden col-span-4 gap-2 mt-4 md:block">
             <div className="hidden w-full h-40 p-2 mb-2 border-2 rounded-md md:block border-blue-primary">
               <span className="text-2xl font-bold">Badges</span>
             </div>
