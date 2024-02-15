@@ -1,11 +1,11 @@
 // src/Signup.js
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ExampleContext from '../../context/Context';
 import { ToastContainer, toast } from 'react-toastify';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa6";
-import './Signup.css'; // Import the CSS file
+import axios from 'axios'; // Import Axios
 
 const Register = () => {
     const navigate = useNavigate();
@@ -23,10 +23,33 @@ const Register = () => {
         toast.success(`Signup with ${provider}`);
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        toast.success('Form submitted successfully!');
+
+        try {
+            // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+            const response = await axios.post('https://api.interv.co.in/authentication/signup/', {
+                username: e.target.username.value,
+                firstName: e.target.firstName.value,
+                lastName: e.target.lastName.value,
+                email: e.target.email.value,
+                password: e.target.password.value,
+            });
+
+            // Check if the signup was successful (you may need to adjust this based on your API response)
+            if (response.data.success) {
+                console.log('Signup successful:', response.data);
+                toast.success('Signup successful');
+                setLogin(true);
+                navigate('/home');
+            } else {
+                console.log('Signup failed:', response.data);
+                toast.error('Signup failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+            toast.error('Signup failed. Please try again.');
+        }
     };
 
     return (

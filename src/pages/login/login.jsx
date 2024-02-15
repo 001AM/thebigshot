@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './login.css'; // Reuse the styling file
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa6";
+import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,13 +32,30 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(formData);
-            toast.success('Login successful');
-            setLogin(true);
-            navigate('/home');
+            console.log(formData)
+            axiosInstance
+			.post(`authentication/login/`, {
+                username : formData.username,
+                password : formData.password
+            })
+			.then((res) => {
+				localStorage.setItem('access_token', res.data.access);
+				localStorage.setItem('refresh_token', res.data.refresh);
+				axiosInstance.defaults.headers['Authorization'] =
+					'JWT ' + localStorage.getItem('access_token');
+				toast.success('success')
+                setLogin(true)
+                navigate('/home')
+				//console.log(res);
+				//console.log(res.data);
+			})
+            .catch((error) => {
+                console.error('Error:', error);
+                toast.error("Registration failed");
+            })
         } catch (error) {
-            console.error('Login failed:', error);
-            toast.error('Login failed. Please try again.');
+            // Handle the error, e.g., show an error message to the user
+            console.error('Registration failed:', error);
         }
     };
 
@@ -52,6 +70,7 @@ const Login = () => {
     const handleSignInWithFacebook = () => {
         toast.success('Sign in with Facebook');
     };
+    
 
     return (
         <div className='flex items-center justify-center min-h-screen bg-black'>
