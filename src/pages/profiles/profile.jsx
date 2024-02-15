@@ -7,13 +7,17 @@ function Profile() {
 
   const [modalData, setModalData] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setModalData({
-      ...modalData,
-      [name]: value,
-    });
+
+  const handleChange = (e, index) => {
+    const { value } = e.target
+    const updatedModalData = [...modalData]
+    updatedModalData[index] = {
+      ...updatedModalData[index],
+      'value': value,
+    }
+    setModalData(updatedModalData)
   };
+  
 
   const [pict, setPict] = useState(pic)
 
@@ -90,7 +94,7 @@ function Profile() {
     });
     closeModal();
   };
-
+  console.log(modalData,"==========")
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -133,22 +137,18 @@ function Profile() {
               &times;
             </span>
             <div className="p-4">
-              {modalData.map((data) => {
-                return (
-                  <div key={data.name}>
-                    <label className="text-lg font-semibold">
-                      {data?.label}
-                    </label>
-                    <input
-                      className="rounded-lg"
-                      type={data?.type}
-                      value={data?.value}
-                      onChange={handleChange}
-                    />
-                  </div>
-                );
-              })}
-
+              {modalData.map((data, index) => (
+                <div key={index}>
+                  <label className="text-lg font-semibold">{data?.label}</label>
+                  <input
+                    className="rounded-lg"
+                    type={data?.type}
+                    value={data?.value}
+                    name={data?.name}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </div>
+              ))}
               <div>
                 <input type="file" onChange={(event) => setPict(URL.createObjectURL(event.target.files[0]))} />
                 <button onClick={saveChanges}>SAVE</button>
