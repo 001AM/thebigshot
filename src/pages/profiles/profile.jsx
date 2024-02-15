@@ -4,6 +4,7 @@ import pic from "../../assets/pic.jpg";
 import ProfileAvatar from "../Jobs/Components/recommdation";
 
 function Profile() {
+  const [pict, setPict] = useState(pic)
   const [avatarInfo, setAvatarInfo] = useState({
     name: "Soham",
     specailization: "Ceo of Interv",
@@ -40,31 +41,28 @@ function Profile() {
           type: "text",
           name: "College",
           label: "College",
-          value: `${
-            initialData?.Education[i]?.College
-              ? initialData?.Education[i]?.College
-              : " "
-          }`,
+          value: `${initialData?.Education[i]?.College
+            ? initialData?.Education[i]?.College
+            : " "
+            }`,
         },
         {
           type: "text",
           name: "Year",
           label: "Year",
-          value: `${
-            initialData?.Education[i]?.Year
-              ? initialData.Education[i].Year
-              : " "
-          }`,
+          value: `${initialData?.Education[i]?.Year
+            ? initialData.Education[i].Year
+            : " "
+            }`,
         },
         {
           type: "text",
           name: "Degree",
           label: "Degree",
-          value: `${
-            initialData?.Education[i]?.Degree
-              ? initialData.Education[i].Degree
-              : " "
-          }`,
+          value: `${initialData?.Education[i]?.Degree
+            ? initialData.Education[i].Degree
+            : " "
+            }`,
         },
       ]);
     }
@@ -89,15 +87,15 @@ function Profile() {
         Year: "2026-2028",
       },
     ],
+    intrest: "Football" //Testing purpose
   });
   const [modalData, setModalData] = useState([]);
   return (
     <div className="grid grid-cols-1 gap-2 px-2 sm:grid-cols-6 md:grid-cols-12">
       {/* So this the model code where I Render the input field using the ModalData to set I pass the key while opening and on that condition the field set in ModalData and rendering is done */}
       <div
-        className={`fixed inset-0 flex items-center col-span-1 sm:col-span-6 md:col-span-12 justify-center z-50 ${
-          isModalOpen ? "visible" : "hidden"
-        }`}
+        className={`fixed inset-0 flex items-center col-span-1 sm:col-span-6 md:col-span-12 justify-center z-50 ${isModalOpen ? "visible" : "hidden"
+          }`}
       >
         {/* <div className="absolute inset-0"></div> */}
         <div className="flex items-center content-center justify-center w-full h-full p-4">
@@ -123,20 +121,20 @@ function Profile() {
                   </div>
                 );
               })}
-              <button onClick={closeModal}>SAVE</button>
+              <div>
+                <input type="file" onChange={(event) => setPict(URL.createObjectURL(event.target.files[0]))}/>
+                <button onClick={closeModal}>SAVE</button>
+                </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="col-span-1 rounded-md h-52 sm:col-span-6 md:col-span-12 bg-blue-primary"></div>
       <div className="col-span-1 sm:col-span-6 md:col-span-12 ">
+        <div className="static col-span-1 rounded-md h-52 sm:col-span-6 md:col-span-12 bg-blue-primary"></div>
         <div className="grid grid-cols-1 gap-2 px-2 sm:grid-cols-6 md:grid-cols-12">
-          <div className="col-span-1 sm:col-span-6 md:col-span-8 ">
-            <div className="p-2 pl-5 mb-2 border-2 rounded-md sm:pl-8 h-52 sm:col-span-6 md:col-span-8 border-blue-primary">
-              <div className="absolute z-10 w-32 h-32 col-span-1 overflow-hidden bg-white border-4 border-white rounded-full lg:col-span-12 sm:col-span-6 sm:w-36 sm:h-36 top-52 left-10">
-                <img src={pic} alt="picture" />
-              </div>
-
+          <div className="col-span-1 sm:col-span-6 md:col-span-8 relative">
+            <img src={pict} alt="picture" className="absolute w-32 h-32 col-span-1 overflow-hidden bg-white border-4 border-white rounded-full lg:col-span-12 sm:col-span-6 sm:w-36 sm:h-36 top-0 left-5 transform translate-x-1 -translate-y-1/2" />
+            <div className="p-2 mt-4 z-10 pl-5 mb-2 border-2 rounded-md sm:pl-8 h-52 sm:col-span-6 md:col-span-8 border-blue-primary">
               <div>
                 <div
                   className="flex flex-row hover:cursor-pointer"
@@ -155,7 +153,6 @@ function Profile() {
                 <div className="">Mumbai, Maharashtra, India</div>
               </div>
             </div>
-
             <div className="p-2 pl-5 mb-2 border-2 rounded-md sm:pl-8 h-52 sm:col-span-6 md:col-span-8 border-blue-primary">
               <div className="flex flex-row">
                 <span className="text-2xl font-bold">Experience </span>
@@ -190,7 +187,7 @@ function Profile() {
                       <div
                         className="ml-auto hover:cursor-pointer"
                         onClick={() => {
-                          openModal("Education", key);
+                          openModal("Education");
                         }}
                       >
                         <div className="flex">
@@ -216,7 +213,7 @@ function Profile() {
               <div className="w-full h-full"></div>
             </div>
           </div>
-          <div className="hidden col-span-4 gap-2 md:block">
+          <div className=" mt-4 hidden col-span-4 gap-2 md:block">
             <div className="hidden w-full h-40 p-2 mb-2 border-2 rounded-md md:block border-blue-primary">
               <span className="text-2xl font-bold">Badges</span>
             </div>
