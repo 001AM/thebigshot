@@ -4,7 +4,19 @@ import pic from "../../assets/pic.jpg";
 import ProfileAvatar from "../Jobs/Components/recommdation";
 
 function Profile() {
+
+  const [modalData, setModalData] = useState([]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setModalData({
+      ...modalData,
+      [name]: value,
+    });
+  };
+
   const [pict, setPict] = useState(pic)
+
   const [avatarInfo, setAvatarInfo] = useState({
     name: "Soham",
     specailization: "Ceo of Interv",
@@ -68,12 +80,23 @@ function Profile() {
     }
   };
 
+  const saveChanges = () => {
+    // Update initialData with formData
+    setInitialData({
+      ...initialData,
+      firstname: initialData.firstname,
+      lastname: initialData.lastname,
+      phoneno: initialData.phoneno,
+    });
+    closeModal();
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
   const [initialData, setInitialData] = useState({
-    firstname: "soham",
-    lastname: "panchal",
+    firstname: "Soham",
+    lastname: "",
     phoneno: "+91 9511671955",
     Education: [
       {
@@ -89,7 +112,10 @@ function Profile() {
     ],
     intrest: "Football" //Testing purpose
   });
-  const [modalData, setModalData] = useState([]);
+
+
+
+
   return (
     <div className="grid grid-cols-1 gap-2 px-2 sm:grid-cols-6 md:grid-cols-12">
       {/* So this the model code where I Render the input field using the ModalData to set I pass the key while opening and on that condition the field set in ModalData and rendering is done */}
@@ -109,22 +135,24 @@ function Profile() {
             <div className="p-4">
               {modalData.map((data) => {
                 return (
-                  <div key={data.id}>
-                    <label className="text-lg font-semibold ">
+                  <div key={data.name}>
+                    <label className="text-lg font-semibold">
                       {data?.label}
                     </label>
                     <input
                       className="rounded-lg"
                       type={data?.type}
                       value={data?.value}
+                      onChange={handleChange}
                     />
                   </div>
                 );
               })}
+
               <div>
-                <input type="file" onChange={(event) => setPict(URL.createObjectURL(event.target.files[0]))}/>
-                <button onClick={closeModal}>SAVE</button>
-                </div>
+                <input type="file" onChange={(event) => setPict(URL.createObjectURL(event.target.files[0]))} />
+                <button onClick={saveChanges}>SAVE</button>
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +174,7 @@ function Profile() {
                   <span className="text-lg">Edit</span>
                 </div>
                 <div className="mt-2 text-xl font-semibold sm:mt-6 sm:text-2xl">
-                  SOHAM PANCHAL
+                  {initialData.firstname}
                 </div>
                 <div className="">Full Stack Developer</div>
                 <div className="">+91 9511671955</div>
@@ -187,7 +215,7 @@ function Profile() {
                       <div
                         className="ml-auto hover:cursor-pointer"
                         onClick={() => {
-                          openModal("Education");
+                          openModal("Education", key);
                         }}
                       >
                         <div className="flex">
