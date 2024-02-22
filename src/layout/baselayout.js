@@ -1,15 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 
 function BaseLayout() {
   return (
     <>
-      <div className="flex flex-col h-screen">
-        <nav className="top-0 w-full text-white absoulte">
-          <Navbar />
+      <div className=" h-screen">
+        <nav className="">
+          <Navbar/>
         </nav>
-        <div className="px-2 mt-4 overflow-y-auto">
+        <div className="">
           <Outlet />
         </div>
       </div>
